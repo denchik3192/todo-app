@@ -1,0 +1,18 @@
+.toDo {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 20px;
+    width: 800px;
+    height: 20px;
+    border-radius: 4px;
+    background-color: rgb(255, 176, 127);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    
+
+    .content {
+        margin-left: 40px;
+    }
+}
