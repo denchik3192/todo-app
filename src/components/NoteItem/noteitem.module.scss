@@ -1,16 +1,68 @@
 .toDo {
     position: relative;
     margin-bottom: 10px;
-    padding: 20px;
+    padding: 10px;
     width: 600px;
-    height: 100px;
+    height: 120px;
+    background: rgb(217, 217, 217);
     border: 1px solid grey;
     border-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 
-    .content {
-        margin-left: 40px;
+    .note {
+        text-align: start;
+        align-self: flex-start;
+        flex-basis: 100%;
+    }
+
+    .weatherBlock {
+        position: relative;
+
+        img {
+            position: relative;
+            top: -10px;
+            width: 80px;
+            overflow: hidden;
+        }
+
+        .temperature {
+            position: absolute;
+            top: 65px;
+            left: 22px;
+        }
+    }
+
+    .buttonsBlock {
+        align-self: flex-start;
+        margin-left: 10px;
+        .editButton,
+        .deleteButton {
+            width: 14px;
+            height: 14px;
+            background-repeat: no-repeat;
+            align-self: flex-start;
+            cursor: pointer;
+            transition: 0.2s ease-in;
+           
+        }
+        .deleteButton {
+            background-image: url('../../assets/delete.svg');
+            &:hover {
+                transform: rotate(90deg);
+                transition: 0.15s ease-in-out;
+            }
+        }
+
+        .editButton {
+            background-image: url('../../assets/edit.svg');
+            margin-top: 10px;
+            width: 18px;
+            height: 18px;
+            &:hover {
+                transform: rotate(45deg)
+            }
+        }
     }
 }
