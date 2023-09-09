@@ -1,15 +1,18 @@
 import './App.css';
+import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
-import TodoItem from './components/ToDoItem/ToDoItem';
+import NoteItem from './components/NoteItem/NoteItem';
 
 function App() {
   return (
     <div className="App">
-      <div className="wrapper">
-        <Header />
-        <TodoItem />
-        <TodoItem />
-      </div>
+      <main>
+        <div className="wrapper">
+          <Header />
+          <NoteItem />
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 }

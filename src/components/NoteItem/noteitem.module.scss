@@ -2,15 +2,13 @@
     position: relative;
     margin-bottom: 10px;
     padding: 20px;
-    width: 800px;
-    height: 20px;
-    border-radius: 4px;
-    background-color: rgb(255, 176, 127);
+    width: 600px;
+    height: 100px;
+    border: 1px solid grey;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    
 
     .content {
         margin-left: 40px;

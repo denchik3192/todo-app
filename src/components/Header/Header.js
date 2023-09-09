@@ -1,7 +1,11 @@
 import React from 'react';
 
 function Header() {
-  return <h1>ToDoList</h1>;
+  return (
+    <header>
+      <h1>Notes</h1>
+    </header>
+  );
 }
 
 export default Header;
