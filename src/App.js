@@ -5,19 +5,19 @@ import Header from './components/Header/Header';
 import NoteItem from './components/NoteItem/NoteItem';
 
 function App() {
-  const { notes } = useSelector((state) => state.notes);
+  const { notes, weather } = useSelector((state) => state.notes);
 
   return (
     <div className="App">
-      <Header />
-      <main>
-        <div className="wrapper">
+      <div className="wrapper">
+        <Header />
+        <main>
           {Object.values(notes)?.map((note) => (
-            <NoteItem {...note} key={note.id} />
+            <NoteItem {...note} key={note.id} weather={weather} />
           ))}
-        </div>
-      </main>
-      <Footer />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }

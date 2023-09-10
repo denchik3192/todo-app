@@ -11,6 +11,12 @@
     align-items: center;
     justify-content: flex-end;
 
+    textarea {
+        display: block;
+        align-self: flex-start;
+        flex-basis: 100%;
+    }
+
     .note {
         text-align: start;
         align-self: flex-start;
