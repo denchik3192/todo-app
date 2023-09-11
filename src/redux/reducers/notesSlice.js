@@ -1,21 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchWeatherData } from '../../API/API';
 
-// export const fetchWeather = createAsyncThunk(
-//   'notes/fetchWeather',
-//   async ({ inputValue, date }, rejectedWithValue) => {
-//     try {
-//       const response = await fetchWeatherData();
-//       if (response.cod !== 200) {
-//         throw new Error('Server Error!');
-//       }
-//       // dispatch(inputValue, date)
-//       return response;
-//     } catch (error) {
-//       return rejectedWithValue(error.message);
-//     }
-//   },
-// );
+export const fetchWeather = createAsyncThunk('notes/fetchWeather', async (_, rejectedWithValue) => {
+  try {
+    const response = await fetchWeatherData();
+    if (response.cod !== 200) {
+      throw new Error('Server Error!');
+    }
+    return response;
+  } catch (error) {
+    return rejectedWithValue(error.message);
+  }
+});
 
 const initialState = {
   notes: [
@@ -25,10 +21,11 @@ const initialState = {
       weather: 16,
       date: '2 Nov 2025',
       time: '15:16',
+      icon: '10d',
     },
   ],
   weather: '12',
-  weatherIcon: '10d',
+  icon: null,
 };
 
 export const notesSlice = createSlice({
@@ -40,9 +37,10 @@ export const notesSlice = createSlice({
       state.notes.push({
         id: newId,
         note: action.payload.inputValue,
-        weather: state.weather,
+        weather: Math.round(state.weather),
         date: action.payload.date.slice(0, 11),
         time: action.payload.date.slice(11, 21),
+        icon: state.icon,
       });
     },
     deleteNote(state, action) {
@@ -56,13 +54,16 @@ export const notesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // builder.addCase(fetchWeather.pending, (state, action) => {});
-    // builder.addCase(fetchWeather.fulfilled, (state, action) => {
-    //   // action.payload.main.temp;
-    // });
-    // builder.addCase(fetchWeather.rejected, (state, action) => {
-    //   console.log(action.payload);
-    // });
+    builder.addCase(fetchWeather.pending, (state, action) => {});
+    builder.addCase(fetchWeather.fulfilled, (state, action) => {
+      console.log(action.payload);
+      console.log(action.payload.weather[0].icon);
+      state.weather = action.payload.main.temp;
+      state.icon = action.payload.weather[0].icon;
+    });
+    builder.addCase(fetchWeather.rejected, (state, action) => {
+      console.log(action.payload);
+    });
   },
 });
 
