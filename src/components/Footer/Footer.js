@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import s from './footer.scss';
+import s from './footer.module.scss';
 import { useDispatch } from 'react-redux';
 import { addNote } from '../../redux/reducers/notesSlice';
 
@@ -9,12 +9,13 @@ function Footer() {
   const dispatch = useDispatch();
 
   const handleInput = (e) => {
+    const value = e.target.value;
     const length = e.target.value.length;
     if (length > 300) {
       setinputError('The length is limited to 300 characters.');
     } else {
       setinputError('');
-      setInputValue(e.target.value);
+      setInputValue(value);
     }
   };
 
@@ -28,10 +29,10 @@ function Footer() {
     e.preventDefault();
     setInputValue('');
     dispatch(addNote({ inputValue, date }));
-    // dispatch(fetchWeather({ inputValue, date }));
   };
+
   return (
-    <footer className="sdsd">
+    <footer>
       <form onSubmit={handleSubmit}>
         <label className={s.inputLabel} htmlFor="note">
           Add note...

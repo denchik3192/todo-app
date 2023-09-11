@@ -33,7 +33,7 @@ export const notesSlice = createSlice({
   initialState,
   reducers: {
     addNote(state, action) {
-      const newId = state.notes.length + 1; //fix
+      const newId = Math.random();
       state.notes.push({
         id: newId,
         note: action.payload.inputValue,
@@ -56,16 +56,14 @@ export const notesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchWeather.pending, (state, action) => {});
     builder.addCase(fetchWeather.fulfilled, (state, action) => {
-      console.log(action.payload);
-      console.log(action.payload.weather[0].icon);
       state.weather = action.payload.main.temp;
       state.icon = action.payload.weather[0].icon;
     });
-    builder.addCase(fetchWeather.rejected, (state, action) => {
-      console.log(action.payload);
-    });
+    builder.addCase(fetchWeather.rejected, (state, action) => {});
   },
 });
 
 export default notesSlice.reducer;
 export const { addNote, deleteNote, editNote } = notesSlice.actions;
+
+export const selectNotes = (state) => state.notes.notes;

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NoteItem from '../NoteItem/NoteItem';
 import { fetchWeather } from '../../redux/reducers/notesSlice';
+import './main.module.scss';
 
 function Main() {
   const { notes } = useSelector((state) => state.notes);

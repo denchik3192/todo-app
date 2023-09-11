@@ -19,7 +19,8 @@ const NoteItem = ({ id, note, weather, date, time, icon }) => {
   };
 
   const handleEditInput = (e) => {
-    setEditValue(e.target.value);
+    const value = e.target.value;
+    setEditValue(value);
   };
 
   return (
