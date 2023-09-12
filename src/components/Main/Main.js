@@ -11,7 +11,7 @@ function Main() {
 
   useEffect(() => {
     dispatch(fetchWeather());
-  }, []);
+  }, [dispatch]);
 
   return (
     <main>
