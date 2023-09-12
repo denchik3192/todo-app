@@ -26,6 +26,7 @@ const initialState = {
   ],
   weather: '12',
   icon: null,
+  status: null,
 };
 
 export const notesSlice = createSlice({
@@ -54,12 +55,17 @@ export const notesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchWeather.pending, (state, action) => {});
+    builder.addCase(fetchWeather.pending, (state, action) => {
+      state.status = 'loading...';
+    });
     builder.addCase(fetchWeather.fulfilled, (state, action) => {
       state.weather = action.payload.main.temp;
       state.icon = action.payload.weather[0].icon;
+      state.status = 'sucsess';
     });
-    builder.addCase(fetchWeather.rejected, (state, action) => {});
+    builder.addCase(fetchWeather.rejected, (state, action) => {
+      state.status = 'failed';
+    });
   },
 });
 
