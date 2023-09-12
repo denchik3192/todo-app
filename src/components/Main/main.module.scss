@@ -1,3 +1,31 @@
 main {
-    height: 100%;
+    flex-grow: 1;
+
+    .noNotesBlock {
+        font-size: 1.5em;
+        letter-spacing: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        border-top: 1px solid grey;
+        padding-top: 20px;
+        font-style: italic;
+
+        .arrow {
+            width: 40px;
+            height: 40px;
+            background-image: url('../../assets/arrow.svg');
+            background-repeat: no-repeat;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 10px;
+        .noNotesBlock {
+            font-size: 1.3em;
+           
+        }
+    }
 }
