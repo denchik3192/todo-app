@@ -20,8 +20,7 @@ function Footer() {
   };
 
   const getDate = () => {
-    const date = new Date().toString().slice(4, 21);
-    return date;
+    return new Date().toString().slice(4, 21);
   };
 
   const handleSubmit = (e) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import s from './noteitem.module.scss';
 import { useDispatch } from 'react-redux';
 import { deleteNote, editNote } from '../../redux/reducers/notesSlice';
@@ -8,6 +8,11 @@ const NoteItem = ({ id, note, weather, date, time, icon }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [editValue, setEditValue] = useState(note);
   const dispatch = useDispatch();
+  const texareaRef = useRef(null);
+
+  useEffect(() => {
+    if (isEdit) texareaRef.current.focus();
+  }, [isEdit]);
 
   const removeNote = () => {
     dispatch(deleteNote(id));
@@ -19,14 +24,14 @@ const NoteItem = ({ id, note, weather, date, time, icon }) => {
   };
 
   const handleEditInput = (e) => {
-    const value = e.target.value;
+    const { value } = e.target;
     setEditValue(value);
   };
 
   return (
     <div className={s.noteBlock}>
       {isEdit ? (
-        <textarea onChange={handleEditInput} value={editValue} />
+        <textarea ref={texareaRef} onChange={handleEditInput} value={editValue} />
       ) : (
         <div className={s.note}>{note}</div>
       )}

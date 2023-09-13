@@ -1,29 +1,8 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchWeatherData } from '../../API/API';
-
-export const fetchWeather = createAsyncThunk('notes/fetchWeather', async (_, rejectedWithValue) => {
-  try {
-    const response = await fetchWeatherData();
-    if (response.cod !== 200) {
-      throw new Error('Server Error!');
-    }
-    return response;
-  } catch (error) {
-    return rejectedWithValue(error.message);
-  }
-});
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchWeather } from '../asyncActions/fetchWeather';
 
 const initialState = {
-  notes: [
-    {
-      id: 1,
-      note: 'Buy new phone',
-      weather: 16,
-      date: '2 Nov 2025',
-      time: '15:16',
-      icon: '10d',
-    },
-  ],
+  notes: [],
   weather: '12',
   icon: null,
   status: null,
@@ -46,6 +25,9 @@ export const notesSlice = createSlice({
     },
     deleteNote(state, action) {
       state.notes = state.notes.filter((el) => el.id !== action.payload);
+    },
+    addNotes(state, action) {
+      state.notes = action.payload;
     },
     editNote(state, action) {
       const newNotes = state.notes.filter((item) => {
@@ -70,4 +52,4 @@ export const notesSlice = createSlice({
 });
 
 export default notesSlice.reducer;
-export const { addNote, deleteNote, editNote } = notesSlice.actions;
+export const { addNote, deleteNote, editNote, addNotes } = notesSlice.actions;

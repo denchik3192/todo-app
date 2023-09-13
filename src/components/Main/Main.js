@@ -1,17 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NoteItem from '../NoteItem/NoteItem';
-import { fetchWeather } from '../../redux/reducers/notesSlice';
+import { addNotes } from '../../redux/reducers/notesSlice';
 import s from './main.module.scss';
 import { selectNotes } from '../../redux/selectors/selectNotes';
+import { fetchNotesFromLS } from '../../utils/fetchNotesFromLS';
+import { setNotesToLS } from '../../utils/setNotesToLS';
+import { fetchWeather } from '../../redux/asyncActions/fetchWeather';
 
 function Main() {
   const notes = useSelector(selectNotes);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(fetchWeather());
-  }, [dispatch]);
+    getNotesFromLS();
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    setNotesToLS(notes);
+  }, [notes]);
+
+  const getNotesFromLS = () => {
+    const notes = fetchNotesFromLS();
+    if (notes.length) dispatch(addNotes(notes));
+  };
 
   return (
     <main>
