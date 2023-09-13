@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NoteItem from '../NoteItem/NoteItem';
 import { addNotes } from '../../redux/reducers/notesSlice';
@@ -11,23 +11,16 @@ import { fetchWeather } from '../../redux/asyncActions/fetchWeather';
 function Main() {
   const notes = useSelector(selectNotes);
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
+    const notes = fetchNotesFromLS();
+    if (notes.length) dispatch(addNotes(notes));
     dispatch(fetchWeather());
-    getNotesFromLS();
-    setIsLoading(false);
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setNotesToLS(notes);
   }, [notes]);
-
-  const getNotesFromLS = () => {
-    const notes = fetchNotesFromLS();
-    if (notes.length) dispatch(addNotes(notes));
-  };
 
   return (
     <main>
